@@ -1,9 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logging;
-using Logging.Messages;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace UnitTestLogging
 {

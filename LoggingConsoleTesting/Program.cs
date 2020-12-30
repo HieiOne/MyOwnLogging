@@ -3,7 +3,6 @@
 namespace LoggingConsoleTesting
 {
     using Logging;
-    using Logging.Messages;
 
     class Program
     {

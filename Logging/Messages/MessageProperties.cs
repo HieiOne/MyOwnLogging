@@ -1,7 +1,4 @@
-﻿using System;
-
-
-namespace Logging.Messages
+﻿namespace Logging.Messages
 {
     /// <summary>
     /// Defines the properties of the message, indicating if it will have prefixes, timestamps or different colors
