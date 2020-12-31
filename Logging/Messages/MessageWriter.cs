@@ -13,7 +13,7 @@ namespace Logging.Messages
             switch (loggingMode)
             {
                 case LoggingMode.Console:
-                    ConsoleWriter.WriteMessage(msg, MessageLevelProperties.GetConsoleColor(messageLevel), true);
+                    ConsoleWriter.WriteMessage(msg, MessageLevelProperties.GetConsoleColor(messageLevel), MessageLevelProperties.GetDisplayColor(messageLevel));
                     break;
                 case LoggingMode.TextFile:
                     break;

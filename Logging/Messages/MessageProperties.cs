@@ -1,4 +1,6 @@
-﻿namespace Logging.Messages
+﻿using System;
+
+namespace Logging.Messages
 {
     /// <summary>
     /// Defines the properties of the message, indicating if it will have prefixes, timestamps or different colors
@@ -15,5 +17,6 @@
         public string TimeStampFormat { get; set; } //= "hh:mm:ss";
 
         public int GetCounter(MessageLevel messageLevel) { return MessageLevelProperties.GetCounter(messageLevel); }
+        public void SetConsoleColor(MessageLevel messageLevel, ConsoleColor consoleColor) { MessageLevelProperties.SetConsoleColor(messageLevel, consoleColor); }
     }
 }

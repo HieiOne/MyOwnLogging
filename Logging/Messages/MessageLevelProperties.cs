@@ -6,8 +6,9 @@ namespace Logging.Messages
     public sealed class MessageLevelProperties
     {
         public string PrefixMessage { get; set; }
-        public Color DisplayColor { get; set; }
+        public Color FormColor { get; set; }
         public ConsoleColor ConsoleColor { get; set; }
+        public bool DisplayColor { get; private set; }
         private int Counter { get; set; }
 
         public static MessageLevelProperties Info = new MessageLevelProperties("INFO");
@@ -16,12 +17,18 @@ namespace Logging.Messages
         public static MessageLevelProperties Error = new MessageLevelProperties("ERROR", Color.Red, ConsoleColor.Red);
         public static MessageLevelProperties Debug = new MessageLevelProperties("DEBUG", Color.Blue, ConsoleColor.Blue);
 
-        private MessageLevelProperties(string prefixMessage, Color displayColor = default, ConsoleColor consoleColor = ConsoleColor.White)
+        private MessageLevelProperties(string prefixMessage, Color formColor = default, ConsoleColor? consoleColor = null)
         {
             this.PrefixMessage = prefixMessage;
-            this.DisplayColor = displayColor;
-            this.ConsoleColor = consoleColor;
+            this.FormColor = formColor;
             this.Counter = 0;
+            if (consoleColor != null)
+            {
+                this.ConsoleColor = (ConsoleColor)consoleColor;
+                this.DisplayColor = true;
+            }
+            else
+                this.DisplayColor = false;
         }
 
         public static string GetPrefix(MessageLevel messageLevel)
@@ -78,6 +85,54 @@ namespace Logging.Messages
                     return MessageLevelProperties.Debug.Counter;
                 default:
                     return default;
+            }
+        }
+
+        public static bool GetDisplayColor(MessageLevel messageLevel)
+        {
+            switch (messageLevel)
+            {
+                case MessageLevel.Info:
+                    return MessageLevelProperties.Info.DisplayColor;
+                case MessageLevel.Success:
+                    return MessageLevelProperties.Success.DisplayColor;
+                case MessageLevel.Warning:
+                    return MessageLevelProperties.Warning.DisplayColor;
+                case MessageLevel.Error:
+                    return MessageLevelProperties.Error.DisplayColor;
+                case MessageLevel.Debug:
+                    return MessageLevelProperties.Debug.DisplayColor;
+                default:
+                    return default;
+            }
+        }
+
+        public static void SetConsoleColor(MessageLevel messageLevel, ConsoleColor consoleColor)
+        {
+            switch (messageLevel)
+            {
+                case MessageLevel.Info:
+                    MessageLevelProperties.Info.ConsoleColor = consoleColor;
+                    MessageLevelProperties.Info.DisplayColor = true;
+                    break;
+                case MessageLevel.Success:
+                    MessageLevelProperties.Success.ConsoleColor = consoleColor;
+                    MessageLevelProperties.Success.DisplayColor = true;
+                    break;
+                case MessageLevel.Warning:
+                    MessageLevelProperties.Warning.ConsoleColor = consoleColor;
+                    MessageLevelProperties.Warning.DisplayColor = true;
+                    break;
+                case MessageLevel.Error:
+                    MessageLevelProperties.Error.ConsoleColor = consoleColor;
+                    MessageLevelProperties.Error.DisplayColor = true;
+                    break;
+                case MessageLevel.Debug:
+                    MessageLevelProperties.Debug.ConsoleColor = consoleColor;
+                    MessageLevelProperties.Debug.DisplayColor = true;
+                    break;
+                default:
+                    break;
             }
         }
 
