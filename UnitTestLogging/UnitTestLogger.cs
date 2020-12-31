@@ -13,35 +13,35 @@ namespace UnitTestLogging
         public void TestInfoCounter()
         {           
             logger.WriteMsg(sampleText, messageLevel: MessageLevel.Info);
-            Assert.AreEqual(logger.GetMessageCounter(MessageLevel.Info), 1);
+            Assert.AreEqual(logger.GetCounter(MessageLevel.Info), 1);
         }
 
         [TestMethod]
         public void TestSuccessCounter()
         {
             logger.WriteMsg(sampleText, messageLevel: MessageLevel.Success);
-            Assert.AreEqual(logger.GetMessageCounter(MessageLevel.Success), 1);
+            Assert.AreEqual(logger.GetCounter(MessageLevel.Success), 1);
         }
 
         [TestMethod]
         public void TestWarningCounter()
         {
             logger.WriteMsg(sampleText, messageLevel: MessageLevel.Warning);
-            Assert.AreEqual(logger.GetMessageCounter(MessageLevel.Warning), 1);
+            Assert.AreEqual(logger.GetCounter(MessageLevel.Warning), 1);
         }
 
         [TestMethod]
         public void TestErrorCounter()
         {
             logger.WriteMsg(sampleText, messageLevel: MessageLevel.Error);
-            Assert.AreEqual(logger.GetMessageCounter(MessageLevel.Error), 1);
+            Assert.AreEqual(logger.GetCounter(MessageLevel.Error), 1);
         }
 
         [TestMethod]
         public void TestDebugCounter()
         {
             logger.WriteMsg(sampleText, messageLevel: MessageLevel.Debug);
-            Assert.AreEqual(logger.GetMessageCounter(MessageLevel.Debug), 1);
+            Assert.AreEqual(logger.GetCounter(MessageLevel.Debug), 1);
         }
     }
 }

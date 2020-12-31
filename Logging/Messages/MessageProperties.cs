@@ -14,6 +14,6 @@
         /// </summary>
         public string TimeStampFormat { get; set; } //= "hh:mm:ss";
 
-        public int GetMessageCounter(MessageLevel messageLevel) { return MessageLevelProperties.GetCounter(messageLevel); }
+        public int GetCounter(MessageLevel messageLevel) { return MessageLevelProperties.GetCounter(messageLevel); }
     }
 }
