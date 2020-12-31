@@ -9,7 +9,7 @@
     public enum LoggingMode
     {
         Console,
-        TXT
+        TextFile
     }
 
     /// <summary>
@@ -66,25 +66,10 @@
         /// </summary>
         /// <param name="msg">Message to log</param>
         /// <param name="loggingMode"></param>
-        public void WriteMsg(string msg, MessageLevel messageLevel = MessageLevel.Info)
+        public void WriteMessage(string msg, MessageLevel messageLevel = MessageLevel.Info)
         {            
             msg = MessageBuilder.MessageStringBuilder(msg, messageLevel, ShowPrefix, ShowTimeStamp, TimeStampFormat);
-
-            MessageLevelProperties.IncreaseCounter(messageLevel);
-
-            //TODO detect if there's console and if there isn't change to default txt mode
-            switch (LoggingMode)
-            {
-                case LoggingMode.Console:
-                    Console.ForegroundColor = MessageLevelProperties.GetConsoleColor(messageLevel);
-                    Console.WriteLine(msg);
-                    Console.ResetColor();
-                    break;
-                case LoggingMode.TXT:
-                    break;
-                default:
-                    break;
-            }
+            MessageWriter.WriteMessage(LoggingMode, msg, messageLevel);
         }
     }   
 }
