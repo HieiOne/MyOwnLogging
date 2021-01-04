@@ -8,6 +8,7 @@ namespace UnitTestLogging
     [TestClass]
     public class UnitTestMessageBuilder
     {
+        readonly Logger logger = new Logger();
         readonly string text = "Hello World";
 
         [TestMethod]
@@ -26,8 +27,16 @@ namespace UnitTestLogging
             foreach (MessageLevel messageLevel in Enum.GetValues(typeof(MessageLevel)))
             {
                 string msg = MessageBuilder.MessageStringBuilder(text, messageLevel, true, false);
-                Assert.AreEqual(msg, MessageLevelProperties.GetPrefix(messageLevel) + ": " + text);
+                Assert.AreEqual(msg, logger.GetPrefix(messageLevel) + ": " + text);
             }
+        }
+
+        [TestMethod]
+        public void TestPrefixChange()
+        {
+            logger.SetPrefix(MessageLevel.Info, "TEST");
+            string msg = MessageBuilder.MessageStringBuilder(text, MessageLevel.Info, true, false);            
+            Assert.AreEqual(msg, "TEST: " + text);
         }
 
         [TestMethod]

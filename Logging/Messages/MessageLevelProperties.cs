@@ -1,23 +1,48 @@
-﻿using System;
-using System.Drawing;
+﻿// Licensed under the GNU General Public License v3.0. See LICENSE in the project root for license information.
 
 namespace Logging.Messages
 {
-    public sealed class MessageLevelProperties
+    using System;
+    using System.Drawing;
+
+    /// <summary>
+    /// Defines the Message levels properties, including the prefixes, colors and other information regarding the levels.
+    /// This class creates statics objects representing each Enum Value (manually)
+    /// </summary>
+    internal sealed class MessageLevelProperties
     {
-        public string PrefixMessage { get; set; }
-        public Color FormColor { get; set; }
-        public ConsoleColor ConsoleColor { get; set; }
-        public bool DisplayColor { get; private set; }
-        private int Counter { get; set; }
+        /// <summary>
+        /// Initialization of Info Message Level
+        /// </summary>
+        private static readonly MessageLevelProperties Info = new MessageLevelProperties("INFO");
 
-        public static MessageLevelProperties Info = new MessageLevelProperties("INFO");
-        public static MessageLevelProperties Success = new MessageLevelProperties("OK", Color.Green, ConsoleColor.Green);
-        public static MessageLevelProperties Warning = new MessageLevelProperties("WARNING", Color.Yellow, ConsoleColor.Yellow);
-        public static MessageLevelProperties Error = new MessageLevelProperties("ERROR", Color.Red, ConsoleColor.Red);
-        public static MessageLevelProperties Debug = new MessageLevelProperties("DEBUG", Color.Blue, ConsoleColor.Blue);
+        /// <summary>
+        /// Initialization of Success Message Level
+        /// </summary>
+        private static readonly MessageLevelProperties Success = new MessageLevelProperties("OK", Color.Green, ConsoleColor.Green);
 
-        private MessageLevelProperties(string prefixMessage, Color formColor = default, ConsoleColor? consoleColor = null)
+        /// <summary>
+        /// Initialization of Warning Message Level
+        /// </summary>
+        private static readonly MessageLevelProperties Warning = new MessageLevelProperties("WARNING", Color.Yellow, ConsoleColor.Yellow);
+
+        /// <summary>
+        /// Initialization of Error Message Level
+        /// </summary>
+        private static readonly MessageLevelProperties Error = new MessageLevelProperties("ERROR", Color.Red, ConsoleColor.Red);
+
+        /// <summary>
+        /// Initialization of Debug Message Level
+        /// </summary>
+        private static readonly MessageLevelProperties Debug = new MessageLevelProperties("DEBUG", Color.Blue, ConsoleColor.Blue);
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessageLevelProperties"/> class, the constructor to create a Message Level Property used to create the message levels on the Enum MessagingLevel manually
+        /// </summary>
+        /// <param name="prefixMessage">Prefix message that will be used</param>
+        /// <param name="formColor">Color that will be used in forms</param>
+        /// <param name="consoleColor">Color that will be used in console</param>
+        public MessageLevelProperties(string prefixMessage, Color formColor = default, ConsoleColor? consoleColor = null)
         {
             this.PrefixMessage = prefixMessage;
             this.FormColor = formColor;
@@ -28,9 +53,41 @@ namespace Logging.Messages
                 this.DisplayColor = true;
             }
             else
+            {
                 this.DisplayColor = false;
+            }
         }
 
+        /// <summary>
+        /// Gets or sets the prefix message
+        /// </summary>
+        public string PrefixMessage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the color that will be used in Forms
+        /// </summary>
+        public Color FormColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the color that will be used in Console
+        /// </summary>
+        public ConsoleColor ConsoleColor { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the prefix will be used in the creation of the log message or not
+        /// </summary>
+        public bool DisplayColor { get; private set; }
+
+        /// <summary>
+        /// Gets or sets privately the counter of how many times each message level was used
+        /// </summary>
+        private int Counter { get; set; }
+
+        /// <summary>
+        /// Gets the prefix depending on <paramref name="messageLevel"/>
+        /// </summary>
+        /// <param name="messageLevel">Message level to get the value from</param>
+        /// <returns>String with the prefix of the message level</returns>
         public static string GetPrefix(MessageLevel messageLevel)
         {
             switch (messageLevel)
@@ -50,6 +107,40 @@ namespace Logging.Messages
             }
         }
 
+        /// <summary>
+        /// Sets the prefix of the <paramref name="messageLevel"/>
+        /// </summary>
+        /// <param name="messageLevel">Message level to set the value to</param>
+        /// <param name="prefixMsg">Prefix to set the prefix to</param>
+        public static void SetPrefix(MessageLevel messageLevel, string prefixMsg)
+        {
+            switch (messageLevel)
+            {
+                case MessageLevel.Info:
+                    MessageLevelProperties.Info.PrefixMessage = prefixMsg;
+                    break;
+                case MessageLevel.Success:
+                    MessageLevelProperties.Success.PrefixMessage = prefixMsg;
+                    break;
+                case MessageLevel.Warning:
+                    MessageLevelProperties.Warning.PrefixMessage = prefixMsg;
+                    break;
+                case MessageLevel.Error:
+                    MessageLevelProperties.Error.PrefixMessage = prefixMsg;
+                    break;
+                case MessageLevel.Debug:
+                    MessageLevelProperties.Debug.PrefixMessage = prefixMsg;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Console color depending on the <paramref name="messageLevel"/>
+        /// </summary>
+        /// <param name="messageLevel">Message level to get the value from</param>
+        /// <returns>ConsoleColor of the specified <paramref name="messageLevel"/></returns>
         public static ConsoleColor GetConsoleColor(MessageLevel messageLevel)
         {
             switch (messageLevel)
@@ -69,6 +160,11 @@ namespace Logging.Messages
             }
         }
 
+        /// <summary>
+        /// Gets the counter depending on <paramref name="messageLevel"/>
+        /// </summary>
+        /// <param name="messageLevel">Message level to get the value from</param>
+        /// <returns>Integer with the counter of messages written</returns>
         public static int GetCounter(MessageLevel messageLevel)
         {
             switch (messageLevel)
@@ -88,6 +184,11 @@ namespace Logging.Messages
             }
         }
 
+        /// <summary>
+        /// Gets the boolean value specifying if the color will be displayed or not depending on the <paramref name="messageLevel"/>
+        /// </summary>
+        /// <param name="messageLevel">Message level to get the value from</param>
+        /// <returns>Boolean value of the specified <paramref name="messageLevel"/></returns>
         public static bool GetDisplayColor(MessageLevel messageLevel)
         {
             switch (messageLevel)
@@ -107,6 +208,11 @@ namespace Logging.Messages
             }
         }
 
+        /// <summary>
+        /// Sets the Console Color of the <paramref name="messageLevel"/>
+        /// </summary>
+        /// <param name="messageLevel">Message level to set the value to</param>
+        /// <param name="consoleColor">Color to set the value to</param>
         public static void SetConsoleColor(MessageLevel messageLevel, ConsoleColor consoleColor)
         {
             switch (messageLevel)
@@ -136,6 +242,10 @@ namespace Logging.Messages
             }
         }
 
+        /// <summary>
+        /// Increases the counter of the specified <paramref name="messageLevel"/>
+        /// </summary>
+        /// <param name="messageLevel">Message level to increase the counter</param>
         internal static void IncreaseCounter(MessageLevel messageLevel)
         {
             switch (messageLevel)

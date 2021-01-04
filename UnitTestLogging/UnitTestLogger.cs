@@ -6,8 +6,8 @@ namespace UnitTestLogging
     [TestClass]
     public class UnitTestLoggerCounter
     {
-        Logger logger = new Logger();
-        string sampleText = "Text";
+        readonly Logger logger = new Logger();
+        readonly string sampleText = "Text";
 
         [TestMethod]
         public void TestInfoCounter()
