@@ -27,6 +27,11 @@ namespace LoggingConsoleTesting
             Console.WriteLine("Warning Messages: " + logger.GetCounter(MessageLevel.Warning));
             Console.WriteLine("Error Messages: " + logger.GetCounter(MessageLevel.Error));
             Console.WriteLine("Debug Messages: " + logger.GetCounter(MessageLevel.Debug));
+
+            Logger debugLogger = new Logger(LoggingMode.Debug);
+            debugLogger.ShowPrefix = true;
+            debugLogger.ShowTimeStamp = true;
+            debugLogger.WriteMessage("TEST", MessageLevel.Debug);
             Console.ReadKey();
         }
     }

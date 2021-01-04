@@ -25,6 +25,9 @@ namespace Logging.Messages
                 case LoggingMode.Console:
                     ConsoleWriter.WriteMessage(msg, MessageLevelProperties.GetConsoleColor(messageLevel), MessageLevelProperties.GetDisplayColor(messageLevel));
                     break;
+                case LoggingMode.Debug:
+                    DebuggerWriter.WriteMessage(msg);
+                    break;
                 case LoggingMode.TextFile:
                     break;
                 default:

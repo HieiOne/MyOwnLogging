@@ -15,6 +15,11 @@ namespace Logging
         Console,
 
         /// <summary>
+        /// Represents that the log will go to the attached debugger
+        /// </summary>
+        Debug,
+
+        /// <summary>
         /// Represents that the log will go to a file
         /// </summary>
         TextFile
@@ -76,6 +81,14 @@ namespace Logging
             this.LoggingMode = loggingMode;
             this.FilePath = filePath;
             this.FileName = fileName;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Logger"/> class with a logging mode with any specified mode
+        /// </summary>
+        public Logger(LoggingMode loggingMode)
+        {
+            this.LoggingMode = loggingMode;
         }
 
         /// <summary>
