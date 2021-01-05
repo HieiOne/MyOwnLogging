@@ -7,13 +7,13 @@ namespace Logging.Writers
     /// <summary>
     /// This class is used to write into the attached debugger
     /// </summary>
-    internal class DebuggerWriter
+    internal class DebuggerWriter : IWriter
     {
         /// <summary>
-        /// Static method to write into the console
+        /// Method to write into the debugger
         /// </summary>
         /// <param name="msg">Message to display</param>
-        public static void WriteMessage(string msg)
+        public virtual void WriteMessage(string msg)
         {
             Debug.WriteLine(msg);            
         }

@@ -7,15 +7,34 @@ namespace Logging.Writers
     /// <summary>
     /// This class is used to write into the console
     /// </summary>
-    internal class ConsoleWriter
+    internal class ConsoleWriter : IWriter
     {
         /// <summary>
-        /// Static method to write into the console
+        /// Console color to display the message with, mostly specified in the MessageLevelProperties
+        /// </summary>
+        public ConsoleColor consoleColor;
+
+        /// <summary>
+        /// Indicates if the color that is passed should be used or not
+        /// </summary>
+        public bool displayColor;
+
+        /// <summary>
+        /// Initializes a new instance of the Console Writer
+        /// </summary>
+        /// <param name="consoleColor"></param>
+        /// <param name="displayColor"></param>
+        public ConsoleWriter(ConsoleColor consoleColor, bool displayColor)
+        {
+            this.consoleColor = consoleColor;
+            this.displayColor = displayColor;
+        }
+
+        /// <summary>
+        /// Method to write into the console
         /// </summary>
         /// <param name="msg">Message to display</param>
-        /// <param name="consoleColor">Console color to display the message with, mostly specified in the MessageLevelProperties</param>
-        /// <param name="displayColor">Indicates if the color that is passed should be used or not</param>
-        public static void WriteMessage(string msg, ConsoleColor consoleColor, bool displayColor)
+        public virtual void WriteMessage(string msg)
         {
             if (displayColor)
             {

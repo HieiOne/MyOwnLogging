@@ -111,8 +111,6 @@ namespace Logging
             this.LoggingMode = loggingMode;
         }
 
-        //MessageWriter messageWriter = new MessageWriter();
-
         /// <summary>
         /// Gets or sets the file path where the logging files will be stored
         /// </summary>
@@ -139,26 +137,48 @@ namespace Logging
         /// <param name="msg">Message to log</param>
         /// <param name="messageLevel">Indicates the level of the message</param>
         public void WriteMessage(string msg, MessageLevel messageLevel = MessageLevel.Info)
-        {            
+        {
+            IWriter messageWriter = null;
+
             msg = MessageBuilder.MessageStringBuilder(msg, messageLevel, this.ShowPrefix, this.ShowTimeStamp, this.TimeStampFormat);
             MessageLevelProperties.IncreaseCounter(messageLevel);
 
             switch (LoggingMode)
             {
                 case LoggingMode.Console:
-                    ConsoleWriter.WriteMessage(msg, MessageLevelProperties.GetConsoleColor(messageLevel), MessageLevelProperties.GetDisplayColor(messageLevel));
+                    messageWriter = new ConsoleWriter(MessageLevelProperties.GetConsoleColor(messageLevel), MessageLevelProperties.GetDisplayColor(messageLevel));
                     break;
                 case LoggingMode.Debug:
-                    DebuggerWriter.WriteMessage(msg);
+                    messageWriter = new DebuggerWriter();
                     break;
                 case LoggingMode.TextFile:
-                    TextFileWriter.WriteMessage(msg, FilePath, FileName, WritingMode);
+                    messageWriter = new TextFileWriter(FilePath, FileName, WritingMode);
+                    break;
+                default:
+                    break;
+            }
+
+            messageWriter.WriteMessage(msg);
+        }
+
+        /*
+        private void InitializeWriterClass()
+        {
+            switch (LoggingMode)
+            {
+                case LoggingMode.Console:
+                    messageWriter = new ConsoleWriter();
+                    break;
+                case LoggingMode.Debug:
+                    messageWriter = new DebuggerWriter();
+                    break;
+                case LoggingMode.TextFile:
+                    messageWriter = new DebuggerWriter();
                     break;
                 default:
                     break;
             }
         }
-
-
+        */
     }   
 }

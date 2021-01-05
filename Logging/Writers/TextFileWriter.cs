@@ -10,15 +10,23 @@ namespace Logging.Writers
     /// <summary>
     /// This class is used to write into a TXT File
     /// </summary>
-    internal class TextFileWriter
+    internal class TextFileWriter : IWriter
     {
+        public string filePath;
+        public string fileName;
+        public WritingMode writingMode;
+
+        public TextFileWriter(string filePath, string fileName, WritingMode writingMode)
+        {
+            this.filePath = filePath;
+            this.fileName = fileName;
+            this.writingMode = writingMode;
+        }
+
         /// <summary>
-        /// Static method to write into a TXT File
+        /// Method to write into a TXT File
         /// </summary>
-        /// <param name="msg">Message to display</param>
-        /// <param name="filePath"></param>
-        /// <param name="fileName"></param>
-        public static void WriteMessage(string msg, string filePath, string fileName, WritingMode writingMode)
+        public virtual void WriteMessage(string msg)
         {
             // Build full file name
             string fullFileName = MessageProperties.GetFullNamePath(filePath,fileName)+".txt";
