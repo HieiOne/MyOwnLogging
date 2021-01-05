@@ -4,7 +4,10 @@ namespace Logging.Writers
 {
     using System.Diagnostics;
 
-    class DebuggerWriter
+    /// <summary>
+    /// This class is used to write into the attached debugger
+    /// </summary>
+    internal class DebuggerWriter
     {
         /// <summary>
         /// Static method to write into the console

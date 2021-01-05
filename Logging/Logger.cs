@@ -87,6 +87,7 @@ namespace Logging
         /// <summary>
         /// Initializes a new instance of the <see cref="Logger"/> class with a logging mode with any specified mode
         /// </summary>
+        /// <param name="loggingMode">Logging mode that will be used</param>
         public Logger(LoggingMode loggingMode)
         {
             this.LoggingMode = loggingMode;
