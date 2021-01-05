@@ -15,11 +15,11 @@ namespace Logging.Messages
         /// <param name="msg">Message to display or store</param>
         /// <param name="loggingMode">Logging mode that will be used</param>
         /// <param name="messageLevel">Indicates the level of the message</param>
-        public static void WriteMessage(string msg, LoggingMode loggingMode, MessageLevel messageLevel)
+        public void WriteMessage(string msg, Logger logger, MessageLevel messageLevel)
         {
             MessageLevelProperties.IncreaseCounter(messageLevel);
 
-            switch (loggingMode)
+            switch (logger.LoggingMode)
             {
                 case LoggingMode.Console:
                     ConsoleWriter.WriteMessage(msg, MessageLevelProperties.GetConsoleColor(messageLevel), MessageLevelProperties.GetDisplayColor(messageLevel));
@@ -28,6 +28,7 @@ namespace Logging.Messages
                     DebuggerWriter.WriteMessage(msg);
                     break;
                 case LoggingMode.TextFile:
+                    TextFileWriter.WriteMessage(msg, logger.FilePath, logger.FileName, logger.WritingMode);
                     break;
                 default:
                     break;
