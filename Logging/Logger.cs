@@ -77,7 +77,7 @@ namespace Logging
     /// <summary>
     /// All user event logger handler
     /// </summary>
-    public class Logger : MessageProperties
+    public class Logger
     {
         /// <summary>
         /// Class that handles the writing depending on the Logging Mode provided
@@ -111,6 +111,11 @@ namespace Logging
         }
 
         /// <summary>
+        /// Gets or sets the properties that the messages have
+        /// </summary>
+        public MessageProperties MessageProperties { get; set; } = new MessageProperties();
+
+        /// <summary>
         /// Gets the file path where the logging files will be stored, has to be set with the override constructor
         /// </summary>
         public string FilePath { get; private set; }
@@ -137,7 +142,7 @@ namespace Logging
         /// <param name="messageLevel">Indicates the level of the message</param>
         public void WriteMessage(string msg, MessageLevel messageLevel = MessageLevel.Info)
         {
-            msg = MessageBuilder.MessageStringBuilder(msg, messageLevel, this.ShowPrefix, this.ShowTimeStamp, this.TimeStampFormat);
+            msg = MessageBuilder.MessageStringBuilder(msg, messageLevel, this.MessageProperties.ShowPrefix, this.MessageProperties.ShowTimeStamp, this.MessageProperties.TimeStampFormat);
             MessageLevelProperties.IncreaseCounter(messageLevel);
             this.messageWriter.WriteMessage(msg, messageLevel);
         }

@@ -27,14 +27,14 @@ namespace UnitTestLogging
             foreach (MessageLevel messageLevel in Enum.GetValues(typeof(MessageLevel)))
             {
                 string msg = MessageBuilder.MessageStringBuilder(text, messageLevel, true, false);
-                Assert.AreEqual(msg, logger.GetPrefix(messageLevel) + ": " + text);
+                Assert.AreEqual(msg, logger.MessageProperties.GetPrefix(messageLevel) + ": " + text);
             }
         }
 
         [TestMethod]
         public void TestPrefixChange()
         {
-            logger.SetPrefix(MessageLevel.Info, "TEST");
+            logger.MessageProperties.SetPrefix(MessageLevel.Info, "TEST");
             string msg = MessageBuilder.MessageStringBuilder(text, MessageLevel.Info, true, false);            
             Assert.AreEqual(msg, "TEST: " + text);
         }
