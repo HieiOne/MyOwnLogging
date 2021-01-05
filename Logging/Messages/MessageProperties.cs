@@ -12,12 +12,12 @@ namespace Logging.Messages
         /// <summary>
         /// Gets or sets a value indicating whether the message will display a timestamp or not, by default false
         /// </summary>
-        public bool ShowTimeStamp { get; set; }
+        public bool ShowTimeStamp { get; set; } = true;
 
         /// <summary>
         /// Gets or sets a value indicating whether the message will display the prefix or not, by default false
         /// </summary>
-        public bool ShowPrefix { get; set; }
+        public bool ShowPrefix { get; set; } = true;
 
         /// <summary>
         /// Gets or sets the time stamp format, the default value is the current system culture

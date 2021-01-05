@@ -8,11 +8,7 @@ namespace LoggingConsoleTesting
     {
         static void Main()
         {
-            Logger logger = new Logger(LoggingMode.Console)
-            {
-                ShowPrefix = true,
-                ShowTimeStamp = true
-            };
+            Logger logger = new Logger(LoggingMode.Console);
             logger.WriteMessage("Hola Test Logging");
             logger.SetPrefix(MessageLevel.Info, "INFORMACION");
             logger.SetConsoleColor(MessageLevel.Info, ConsoleColor.DarkCyan);
@@ -31,15 +27,9 @@ namespace LoggingConsoleTesting
             Console.WriteLine("Debug Messages: " + logger.GetCounter(MessageLevel.Debug));
 
             Logger debugLogger = new Logger(LoggingMode.Debug);
-            debugLogger.ShowPrefix = true;
-            debugLogger.ShowTimeStamp = true;
             debugLogger.WriteMessage("TEST", MessageLevel.Debug);
 
-            Logger textLogger = new Logger(@"C:\temp", "PruebaLog", LoggingMode.TextFile, WritingMode.Appending)
-            {
-                ShowPrefix = true,
-                ShowTimeStamp = true
-            };            
+            Logger textLogger = new Logger(@"C:\temp", "PruebaLog", LoggingMode.TextFile, WritingMode.Appending);    
             textLogger.WriteMessage("Test");
             textLogger.WriteMessage("Test2");
             textLogger.WriteMessage("Test");
