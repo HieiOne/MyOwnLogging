@@ -3,23 +3,23 @@
 namespace Logging.Writers
 {
     using System;
+    using Logging.Messages;
 
     /// <summary>
     /// This class is used to write into the console
     /// </summary>
-    internal class ConsoleWriter
+    internal class ConsoleWriter : IWriter
     {
         /// <summary>
-        /// Static method to write into the console
+        /// Method to write into the console
         /// </summary>
         /// <param name="msg">Message to display</param>
-        /// <param name="consoleColor">Console color to display the message with, mostly specified in the MessageLevelProperties</param>
-        /// <param name="displayColor">Indicates if the color that is passed should be used or not</param>
-        public static void WriteMessage(string msg, ConsoleColor consoleColor, bool displayColor)
+        /// <param name="messageLevel">Indicates the level of the message</param>
+        public virtual void WriteMessage(string msg, MessageLevel messageLevel)
         {
-            if (displayColor)
+            if (MessageLevelProperties.GetDisplayColor(messageLevel))
             {
-                Console.ForegroundColor = consoleColor;
+                Console.ForegroundColor = MessageLevelProperties.GetConsoleColor(messageLevel);
                 Console.WriteLine(msg);
                 Console.ResetColor();
             }
