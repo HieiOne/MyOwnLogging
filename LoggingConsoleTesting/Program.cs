@@ -8,17 +8,19 @@ namespace LoggingConsoleTesting
     {
         static void Main()
         {
-            Logger logger = new Logger(LoggingMode.Console);
+            Logger logger = new Logger
+            {
+                ShowPrefix = true,
+                ShowTimeStamp = true
+            };
             logger.WriteMessage("Hola Test Logging");
-            logger.SetPrefix(MessageLevel.Info, "INFORMACION");
-            logger.SetConsoleColor(MessageLevel.Info, ConsoleColor.DarkCyan);
             logger.WriteMessage("Hola Test Logging");
             logger.WriteMessage("Hola Test Logging");
             logger.WriteMessage("Hola Test Logging", MessageLevel.Debug);
             logger.WriteMessage("Hola Test Logging", MessageLevel.Debug);
             logger.WriteMessage("Hola Test Logging", MessageLevel.Warning);
             logger.WriteMessage("Hola Test Logging", MessageLevel.Error);
-            logger.SetPrefix(MessageLevel.Error, "TEST CHANGE PREFIX");
+            logger.SetPrefix(MessageLevel.Info, "TEST CHANGE PREFIX");
             logger.WriteMessage("Prefix test");
             Console.WriteLine("Info Messages: " + logger.GetCounter(MessageLevel.Info));
             Console.WriteLine("Success Messages: " + logger.GetCounter(MessageLevel.Success));
@@ -27,19 +29,9 @@ namespace LoggingConsoleTesting
             Console.WriteLine("Debug Messages: " + logger.GetCounter(MessageLevel.Debug));
 
             Logger debugLogger = new Logger(LoggingMode.Debug);
+            debugLogger.ShowPrefix = true;
+            debugLogger.ShowTimeStamp = true;
             debugLogger.WriteMessage("TEST", MessageLevel.Debug);
-
-            Logger textLogger = new Logger(@"C:\temp", "PruebaLog", LoggingMode.TextFile, WritingMode.Appending);    
-            textLogger.WriteMessage("Test");
-            textLogger.WriteMessage("Test2");
-            textLogger.WriteMessage("Test");
-            textLogger.WriteMessage("Test2");
-
-            Logger textLogger2 = new Logger(@"C:\temp", "PruebaLog2", LoggingMode.TextFile, WritingMode.Recreating);
-            textLogger2.WriteMessage("Test3");
-            textLogger2.WriteMessage("Test5");
-            textLogger2.WriteMessage("Test4");
-
             Console.ReadKey();
         }
     }

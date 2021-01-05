@@ -3,23 +3,6 @@
 namespace Logging
 {
     using Messages;
-    using Writers;
-
-    /// <summary>
-    /// Indicates how the logging into a file will be written
-    /// </summary>
-    public enum WritingMode
-    { 
-        /// <summary>
-        /// Indicates that all logs will be appended into the file
-        /// </summary>
-        Appending,
-
-        /// <summary>
-        /// Indicates that the file will be re-created before writing into the file
-        /// </summary>
-        Recreating
-    }
 
     /// <summary>
     /// Depending on the logging mode the message will be displayed or stored in the specified format
@@ -80,9 +63,13 @@ namespace Logging
     public class Logger : MessageProperties
     {
         /// <summary>
-        /// Class that handles the writing depending on the Logging Mode provided
+        /// Initializes a new instance of the <see cref="Logger"/> class with a logging mode set to console by default
         /// </summary>
-        private IWriter messageWriter;
+        public Logger()
+        {
+            // TODO detect if there's console and if there isn't change to default txt mode
+            this.LoggingMode = LoggingMode.Console;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Logger"/> class with the specified logging mode format
@@ -90,14 +77,11 @@ namespace Logging
         /// <param name="filePath">Path where the file will be stored</param>
         /// <param name="fileName">Name of the file</param>
         /// <param name="loggingMode">Logging mode that will be used</param>
-        /// <param name="writingMode">Used writing mode</param>
-        public Logger(string filePath, string fileName, LoggingMode loggingMode, WritingMode writingMode = WritingMode.Appending)
+        public Logger(string filePath, string fileName, LoggingMode loggingMode)
         {
             this.LoggingMode = loggingMode;
             this.FilePath = filePath;
             this.FileName = fileName;
-            this.WritingMode = writingMode;
-            this.InstantiateWriters();
         }
 
         /// <summary>
@@ -107,18 +91,17 @@ namespace Logging
         public Logger(LoggingMode loggingMode)
         {
             this.LoggingMode = loggingMode;
-            this.InstantiateWriters();
         }
 
         /// <summary>
-        /// Gets the file path where the logging files will be stored, has to be set with the overriden constructor
+        /// Gets or sets the file path where the logging files will be stored
         /// </summary>
-        public string FilePath { get; private set; }
+        public string FilePath { get; set; }
 
         /// <summary>
-        /// Gets the fileName that will be used to store the logging, has to be set with the overriden constructor
+        /// Gets or sets the fileName that will be used to store the logging
         /// </summary>
-        public string FileName { get; private set; }
+        public string FileName { get; set; }
 
         /// <summary>
         /// Gets the usage mode, it cannot be modified after instantiation
@@ -126,41 +109,14 @@ namespace Logging
         public LoggingMode LoggingMode { get; private set; }
 
         /// <summary>
-        /// Gets the writing mode, it cannot be modified after instantiation, has to be set with the overriden constructor
-        /// </summary>
-        public WritingMode WritingMode { get; private set; }
-
-        /// <summary>
         /// Writes the message depending on the specified message level and the logging mode set in the logger class
         /// </summary>
         /// <param name="msg">Message to log</param>
         /// <param name="messageLevel">Indicates the level of the message</param>
         public void WriteMessage(string msg, MessageLevel messageLevel = MessageLevel.Info)
-        {
+        {            
             msg = MessageBuilder.MessageStringBuilder(msg, messageLevel, this.ShowPrefix, this.ShowTimeStamp, this.TimeStampFormat);
-            MessageLevelProperties.IncreaseCounter(messageLevel);
-            this.messageWriter.WriteMessage(msg, messageLevel);
-        }
-        
-        /// <summary>
-        /// This class initializes the Message Write depending on the provided logging mode
-        /// </summary>
-        private void InstantiateWriters()
-        {
-            switch (LoggingMode)
-            {
-                case LoggingMode.Console:
-                    this.messageWriter = new ConsoleWriter();
-                    break;
-                case LoggingMode.Debug:
-                    this.messageWriter = new DebuggerWriter();
-                    break;
-                case LoggingMode.TextFile:
-                    this.messageWriter = new TextFileWriter(this.FilePath, this.FileName, this.WritingMode);
-                    break;
-                default:
-                    break;
-            }
+            MessageWriter.WriteMessage(msg, LoggingMode, messageLevel);
         }
     }   
 }

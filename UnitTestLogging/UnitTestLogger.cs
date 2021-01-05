@@ -6,7 +6,7 @@ namespace UnitTestLogging
     [TestClass]
     public class UnitTestLoggerCounter
     {
-        readonly Logger logger = new Logger(LoggingMode.Console);
+        readonly Logger logger = new Logger();
         readonly string sampleText = "Text";
 
         [TestMethod]
