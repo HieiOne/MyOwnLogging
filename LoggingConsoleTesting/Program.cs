@@ -43,7 +43,7 @@ namespace LoggingConsoleTesting
             textLogger.WriteMessage("Test");
             textLogger.WriteMessage("Test2");
             textLogger.FileName = "PruebaLog2";
-            textLogger.WritingMode = WritingMode.Recreating;
+            //textLogger.WritingMode = WritingMode.Recreating;
             textLogger.WriteMessage("Test");
             textLogger.WriteMessage("Test2");
 

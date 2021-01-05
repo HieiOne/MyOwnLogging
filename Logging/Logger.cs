@@ -3,6 +3,7 @@
 namespace Logging
 {
     using Messages;
+    using Writers;
 
     /// <summary>
     /// Indicates how the logging into a file will be written
@@ -110,7 +111,7 @@ namespace Logging
             this.LoggingMode = loggingMode;
         }
 
-        MessageWriter messageWriter = new MessageWriter();
+        //MessageWriter messageWriter = new MessageWriter();
 
         /// <summary>
         /// Gets or sets the file path where the logging files will be stored
@@ -140,7 +141,24 @@ namespace Logging
         public void WriteMessage(string msg, MessageLevel messageLevel = MessageLevel.Info)
         {            
             msg = MessageBuilder.MessageStringBuilder(msg, messageLevel, this.ShowPrefix, this.ShowTimeStamp, this.TimeStampFormat);
-            messageWriter.WriteMessage(msg, this, messageLevel);
+            MessageLevelProperties.IncreaseCounter(messageLevel);
+
+            switch (LoggingMode)
+            {
+                case LoggingMode.Console:
+                    ConsoleWriter.WriteMessage(msg, MessageLevelProperties.GetConsoleColor(messageLevel), MessageLevelProperties.GetDisplayColor(messageLevel));
+                    break;
+                case LoggingMode.Debug:
+                    DebuggerWriter.WriteMessage(msg);
+                    break;
+                case LoggingMode.TextFile:
+                    TextFileWriter.WriteMessage(msg, FilePath, FileName, WritingMode);
+                    break;
+                default:
+                    break;
+            }
         }
+
+
     }   
 }
