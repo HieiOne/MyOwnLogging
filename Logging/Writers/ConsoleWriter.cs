@@ -10,25 +10,25 @@ namespace Logging.Writers
     internal class ConsoleWriter : IWriter
     {
         /// <summary>
-        /// Console color to display the message with, mostly specified in the MessageLevelProperties
+        /// Initializes a new instance of the <see cref="ConsoleWriter"/> class
         /// </summary>
-        public ConsoleColor consoleColor;
-
-        /// <summary>
-        /// Indicates if the color that is passed should be used or not
-        /// </summary>
-        public bool displayColor;
-
-        /// <summary>
-        /// Initializes a new instance of the Console Writer
-        /// </summary>
-        /// <param name="consoleColor"></param>
-        /// <param name="displayColor"></param>
+        /// <param name="consoleColor">Console color that will be used</param>
+        /// <param name="displayColor">Indicates whether or not color will be used</param>
         public ConsoleWriter(ConsoleColor consoleColor, bool displayColor)
         {
-            this.consoleColor = consoleColor;
-            this.displayColor = displayColor;
+            this.ConsoleColor = consoleColor;
+            this.DisplayColor = displayColor;
         }
+
+        /// <summary>
+        /// Gets or sets the console color to display the message with, mostly specified in the MessageLevelProperties
+        /// </summary>
+        public ConsoleColor ConsoleColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the color that is passed should be used or not
+        /// </summary>
+        public bool DisplayColor { get; set; }
 
         /// <summary>
         /// Method to write into the console
@@ -36,9 +36,9 @@ namespace Logging.Writers
         /// <param name="msg">Message to display</param>
         public virtual void WriteMessage(string msg)
         {
-            if (displayColor)
+            if (this.DisplayColor)
             {
-                Console.ForegroundColor = consoleColor;
+                Console.ForegroundColor = this.ConsoleColor;
                 Console.WriteLine(msg);
                 Console.ResetColor();
             }

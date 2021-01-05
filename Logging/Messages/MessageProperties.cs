@@ -25,6 +25,25 @@ namespace Logging.Messages
         public string TimeStampFormat { get; set; } ////= "hh:mm:ss";
 
         /// <summary>
+        /// Gets the full name of the file including the path, checking if the filePath ends or not with the directory separator char
+        /// </summary>
+        /// <param name="filePath">File path of the file</param>
+        /// <param name="fileName">Filename of the file</param>
+        /// <returns>Returns a full path with fileName included</returns>
+        public static string GetFullNamePath(string filePath, string fileName)
+        {
+            // Check if the file path includes the directory separator char
+            if (filePath[filePath.Length - 1] != System.IO.Path.DirectorySeparatorChar)
+            {
+                return filePath + System.IO.Path.DirectorySeparatorChar + fileName;
+            }
+            else
+            {
+                return filePath + fileName;
+            }
+        }
+
+        /// <summary>
         /// Gets the counter depending on <paramref name="messageLevel"/>
         /// </summary>
         /// <param name="messageLevel">Message level to get the value from</param>
@@ -62,25 +81,6 @@ namespace Logging.Messages
         public void SetConsoleColor(MessageLevel messageLevel, ConsoleColor consoleColor) 
         { 
             MessageLevelProperties.SetConsoleColor(messageLevel, consoleColor); 
-        }
-
-        /// <summary>
-        /// Gets the full name of the file including the path, checking if the filePath ends or not with the directory separator char
-        /// </summary>
-        /// <param name="filePath">Filepath of the file</param>
-        /// <param name="fileName">Filename of the file</param>
-        /// <returns>Returns a full path with fileName included</returns>
-        public static string GetFullNamePath(string filePath, string fileName)
-        {
-            // Check if the filePath includes the directory separator char
-            if (filePath[filePath.Length-1] != System.IO.Path.DirectorySeparatorChar)
-            {
-                return filePath + System.IO.Path.DirectorySeparatorChar + fileName;
-            }
-            else
-            {
-                return filePath + fileName;
-            }
         }
     }
 }

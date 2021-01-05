@@ -94,6 +94,7 @@ namespace Logging
         /// <param name="filePath">Path where the file will be stored</param>
         /// <param name="fileName">Name of the file</param>
         /// <param name="loggingMode">Logging mode that will be used</param>
+        /// <param name="writingMode">Used writing mode</param>
         public Logger(string filePath, string fileName, LoggingMode loggingMode, WritingMode writingMode = WritingMode.Appending)
         {
             this.LoggingMode = loggingMode;
@@ -152,7 +153,7 @@ namespace Logging
                     messageWriter = new DebuggerWriter();
                     break;
                 case LoggingMode.TextFile:
-                    messageWriter = new TextFileWriter(FilePath, FileName, WritingMode);
+                    messageWriter = new TextFileWriter(this.FilePath, this.FileName, this.WritingMode);
                     break;
                 default:
                     break;
