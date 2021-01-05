@@ -19,7 +19,6 @@ namespace Logging.Messages
         {
             MessageLevelProperties.IncreaseCounter(messageLevel);
 
-            // TODO detect if there's console and if there isn't change to default txt mode
             switch (loggingMode)
             {
                 case LoggingMode.Console:

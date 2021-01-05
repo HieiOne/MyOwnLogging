@@ -67,6 +67,7 @@ namespace Logging
         /// </summary>
         public Logger()
         {
+            // TODO detect if there's console and if there isn't change to default txt mode
             this.LoggingMode = LoggingMode.Console;
         }
 
