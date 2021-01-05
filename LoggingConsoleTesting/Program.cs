@@ -35,6 +35,11 @@ namespace LoggingConsoleTesting
             textLogger.WriteMessage("Test");
             textLogger.WriteMessage("Test2");
 
+            Logger textLogger2 = new Logger(@"C:\temp", "PruebaLog2", LoggingMode.TextFile, WritingMode.Recreating);
+            textLogger2.WriteMessage("Test3");
+            textLogger2.WriteMessage("Test5");
+            textLogger2.WriteMessage("Test4");
+
             Console.ReadKey();
         }
     }

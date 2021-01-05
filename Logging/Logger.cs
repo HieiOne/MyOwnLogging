@@ -111,12 +111,12 @@ namespace Logging
         }
 
         /// <summary>
-        /// Gets the file path where the logging files will be stored
+        /// Gets the file path where the logging files will be stored, has to be set with the overriden constructor
         /// </summary>
         public string FilePath { get; private set; }
 
         /// <summary>
-        /// Gets the fileName that will be used to store the logging
+        /// Gets the fileName that will be used to store the logging, has to be set with the overriden constructor
         /// </summary>
         public string FileName { get; private set; }
 
@@ -126,7 +126,7 @@ namespace Logging
         public LoggingMode LoggingMode { get; private set; }
 
         /// <summary>
-        /// Gets the writing mode, it cannot be modified after instantiation
+        /// Gets the writing mode, it cannot be modified after instantiation, has to be set with the overriden constructor
         /// </summary>
         public WritingMode WritingMode { get; private set; }
 
