@@ -22,6 +22,12 @@ namespace Logging.Writers
             this.FilePath = filePath;
             this.FileName = fileName;
             this.WritingMode = writingMode;
+
+            // Build full file name
+            this.FullFileName = MessageProperties.GetFullNamePath(this.FilePath, this.FileName) + ".txt";
+
+            // Checks for file path and file name
+            this.FileInitialization();
         }
 
         /// <summary>
@@ -35,6 +41,11 @@ namespace Logging.Writers
         public string FileName { get; set; }
 
         /// <summary>
+        /// Gets or sets full file path and name
+        /// </summary>
+        public string FullFileName { get; set; }
+
+        /// <summary>
         /// Gets or sets the writing mode
         /// </summary>
         public WritingMode WritingMode { get; set; }
@@ -43,30 +54,33 @@ namespace Logging.Writers
         /// Method to write into a TXT File
         /// </summary>
         /// <param name="msg">Message that will be printed</param>
-        public virtual void WriteMessage(string msg)
+        /// <param name="messageLevel">Indicates the level of the message</param>
+        public virtual void WriteMessage(string msg, MessageLevel messageLevel)
         {
-            // Build full file name
-            string fullFileName = MessageProperties.GetFullNamePath(this.FilePath, this.FileName) + ".txt";
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(this.FullFileName, true))
+            {
+                file.WriteLine(msg);
+            }
+        }
 
-            if (!File.Exists(fullFileName))
+        /// <summary>
+        /// Checks that the file path exists (if not, is created) same with the file name, depending on the Logging Mode, messages will be appended or re-created
+        /// </summary>
+        private void FileInitialization()
+        {
+            if (!File.Exists(this.FullFileName))
             {
                 if (!Directory.Exists(this.FilePath))
                 {
                     Directory.CreateDirectory(this.FilePath);
                 }
 
-                File.Create(fullFileName).Close();
+                File.Create(this.FullFileName).Close();
             }
             else if (WritingMode == WritingMode.Recreating)
             {
-                // BUG: It should be checked in the initiation of the class
                 // Even if it exists, in recreating mode, create it again
-                File.Create(fullFileName).Close();
-            }
-
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fullFileName, true))
-            {
-                file.WriteLine(msg);
+                File.Create(this.FullFileName).Close();
             }
         }
     }

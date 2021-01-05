@@ -13,7 +13,8 @@ namespace Logging.Writers
         /// Method to write into the debugger
         /// </summary>
         /// <param name="msg">Message to display</param>
-        public virtual void WriteMessage(string msg)
+        /// <param name="messageLevel">Indicates the level of the message</param>
+        public virtual void WriteMessage(string msg, MessageLevel messageLevel)
         {
             Debug.WriteLine(msg);            
         }

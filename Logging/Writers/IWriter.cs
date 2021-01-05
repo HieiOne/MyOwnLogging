@@ -11,6 +11,7 @@ namespace Logging.Writers
         /// Method to write messages in writers
         /// </summary>
         /// <param name="msg">Message to be displayed</param>
-        void WriteMessage(string msg);
+        /// <param name="messageLevel">Indicates the level of the message</param>
+        void WriteMessage(string msg, MessageLevel messageLevel);
     }
 }

@@ -8,7 +8,7 @@ namespace LoggingConsoleTesting
     {
         static void Main()
         {
-            Logger logger = new Logger
+            Logger logger = new Logger(LoggingMode.Console)
             {
                 ShowPrefix = true,
                 ShowTimeStamp = true
@@ -35,15 +35,13 @@ namespace LoggingConsoleTesting
             debugLogger.ShowTimeStamp = true;
             debugLogger.WriteMessage("TEST", MessageLevel.Debug);
 
-            Logger textLogger = new Logger(@"C:\temp", "PruebaLog", LoggingMode.TextFile)
+            Logger textLogger = new Logger(@"C:\temp", "PruebaLog", LoggingMode.TextFile, WritingMode.Appending)
             {
                 ShowPrefix = true,
                 ShowTimeStamp = true
-            };
+            };            
             textLogger.WriteMessage("Test");
             textLogger.WriteMessage("Test2");
-            textLogger.FileName = "PruebaLog2";
-            //textLogger.WritingMode = WritingMode.Recreating;
             textLogger.WriteMessage("Test");
             textLogger.WriteMessage("Test2");
 

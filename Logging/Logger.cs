@@ -80,13 +80,9 @@ namespace Logging
     public class Logger : MessageProperties
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Logger"/> class with a logging mode set to console by default
+        /// Class that handles the writing depending on the Logging Mode provided
         /// </summary>
-        public Logger()
-        {
-            // TODO detect if there's console and if there isn't change to default txt mode
-            this.LoggingMode = LoggingMode.Console;
-        }
+        private IWriter messageWriter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Logger"/> class with the specified logging mode format
@@ -101,6 +97,7 @@ namespace Logging
             this.FilePath = filePath;
             this.FileName = fileName;
             this.WritingMode = writingMode;
+            this.InstantiateWriters();
         }
 
         /// <summary>
@@ -110,17 +107,18 @@ namespace Logging
         public Logger(LoggingMode loggingMode)
         {
             this.LoggingMode = loggingMode;
+            this.InstantiateWriters();
         }
 
         /// <summary>
-        /// Gets or sets the file path where the logging files will be stored
+        /// Gets the file path where the logging files will be stored
         /// </summary>
-        public string FilePath { get; set; }
+        public string FilePath { get; private set; }
 
         /// <summary>
-        /// Gets or sets the fileName that will be used to store the logging
+        /// Gets the fileName that will be used to store the logging
         /// </summary>
-        public string FileName { get; set; }
+        public string FileName { get; private set; }
 
         /// <summary>
         /// Gets the usage mode, it cannot be modified after instantiation
@@ -139,47 +137,30 @@ namespace Logging
         /// <param name="messageLevel">Indicates the level of the message</param>
         public void WriteMessage(string msg, MessageLevel messageLevel = MessageLevel.Info)
         {
-            IWriter messageWriter = null;
-
             msg = MessageBuilder.MessageStringBuilder(msg, messageLevel, this.ShowPrefix, this.ShowTimeStamp, this.TimeStampFormat);
             MessageLevelProperties.IncreaseCounter(messageLevel);
-
-            switch (LoggingMode)
-            {
-                case LoggingMode.Console:
-                    messageWriter = new ConsoleWriter(MessageLevelProperties.GetConsoleColor(messageLevel), MessageLevelProperties.GetDisplayColor(messageLevel));
-                    break;
-                case LoggingMode.Debug:
-                    messageWriter = new DebuggerWriter();
-                    break;
-                case LoggingMode.TextFile:
-                    messageWriter = new TextFileWriter(this.FilePath, this.FileName, this.WritingMode);
-                    break;
-                default:
-                    break;
-            }
-
-            messageWriter.WriteMessage(msg);
+            this.messageWriter.WriteMessage(msg, messageLevel);
         }
-
-        /*
-        private void InitializeWriterClass()
+        
+        /// <summary>
+        /// This class initializes the Message Write depending on the provided logging mode
+        /// </summary>
+        private void InstantiateWriters()
         {
             switch (LoggingMode)
             {
                 case LoggingMode.Console:
-                    messageWriter = new ConsoleWriter();
+                    this.messageWriter = new ConsoleWriter();
                     break;
                 case LoggingMode.Debug:
-                    messageWriter = new DebuggerWriter();
+                    this.messageWriter = new DebuggerWriter();
                     break;
                 case LoggingMode.TextFile:
-                    messageWriter = new DebuggerWriter();
+                    this.messageWriter = new TextFileWriter(this.FilePath, this.FileName, this.WritingMode);
                     break;
                 default:
                     break;
             }
         }
-        */
     }   
 }
