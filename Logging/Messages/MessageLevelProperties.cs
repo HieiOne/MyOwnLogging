@@ -82,31 +82,31 @@ namespace Logging.Messages
         /// Gets the info properties and can be modified through it
         /// Initialization of Info Message Level
         /// </summary>
-        public MessageLevelProperty Info { get; private set; } = new MessageLevelProperty("INFO");
+        public MessageLevelProperty Info { get; } = new MessageLevelProperty("INFO");
 
         /// <summary>
         /// Gets the success properties and can be modified through it
         /// Initialization of Success Message Level
         /// </summary>
-        public MessageLevelProperty Success { get; private set; } = new MessageLevelProperty("OK", Color.Green, ConsoleColor.Green);
+        public MessageLevelProperty Success { get; } = new MessageLevelProperty("OK", Color.Green, ConsoleColor.Green);
 
         /// <summary>        
         /// Gets the warning properties and can be modified through it
         /// Initialization of Warning Message Level
         /// </summary>
-        public MessageLevelProperty Warning { get; private set; } = new MessageLevelProperty("WARNING", Color.Yellow, ConsoleColor.Yellow);
+        public MessageLevelProperty Warning { get; } = new MessageLevelProperty("WARNING", Color.Yellow, ConsoleColor.Yellow);
 
         /// <summary>
         /// Gets the error properties and can be modified through it
         /// Initialization of Error Message Level
         /// </summary>
-        public MessageLevelProperty Error { get; private set; } = new MessageLevelProperty("ERROR", Color.Red, ConsoleColor.Red);
+        public MessageLevelProperty Error { get; } = new MessageLevelProperty("ERROR", Color.Red, ConsoleColor.Red);
 
         /// <summary>
         /// Gets the debug properties and can be modified through it
         /// Initialization of Debug Message Level
         /// </summary>
-        public MessageLevelProperty Debug { get; private set; } = new MessageLevelProperty("DEBUG", Color.Blue, ConsoleColor.Blue);
+        public MessageLevelProperty Debug { get; } = new MessageLevelProperty("DEBUG", Color.Blue, ConsoleColor.Blue);
 
         /// <summary>
         /// Gets the prefix depending on <paramref name="messageLevel"/>
