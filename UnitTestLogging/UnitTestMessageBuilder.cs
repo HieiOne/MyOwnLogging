@@ -16,7 +16,10 @@ namespace UnitTestLogging
         {
             foreach (MessageLevel messageLevel in Enum.GetValues(typeof(MessageLevel)))
             {
-                string msg = MessageBuilder.MessageStringBuilder(text, messageLevel, false, false);
+                logger.MessageProperties.ShowPrefix = false;
+                logger.MessageProperties.ShowTimeStamp = false;
+
+                string msg = MessageBuilder.MessageStringBuilder(text, messageLevel, logger.MessageProperties, logger.MessageLevelProperties);
                 Assert.AreEqual(msg, text);
             }
         }
@@ -26,16 +29,22 @@ namespace UnitTestLogging
         {
             foreach (MessageLevel messageLevel in Enum.GetValues(typeof(MessageLevel)))
             {
-                string msg = MessageBuilder.MessageStringBuilder(text, messageLevel, true, false);
-                Assert.AreEqual(msg, logger.GetPrefix(messageLevel) + ": " + text);
+                logger.MessageProperties.ShowPrefix = true;
+                logger.MessageProperties.ShowTimeStamp = false;
+
+                string msg = MessageBuilder.MessageStringBuilder(text, messageLevel, logger.MessageProperties, logger.MessageLevelProperties);
+                Assert.AreEqual(msg, logger.MessageLevelProperties.GetPrefix(messageLevel) + ": " + text);
             }
         }
 
         [TestMethod]
         public void TestPrefixChange()
         {
-            logger.SetPrefix(MessageLevel.Info, "TEST");
-            string msg = MessageBuilder.MessageStringBuilder(text, MessageLevel.Info, true, false);            
+            logger.MessageProperties.ShowPrefix = true;
+            logger.MessageProperties.ShowTimeStamp = false;
+
+            logger.MessageLevelProperties.SetPrefix(MessageLevel.Info, "TEST");
+            string msg = MessageBuilder.MessageStringBuilder(text, MessageLevel.Info, logger.MessageProperties, logger.MessageLevelProperties);            
             Assert.AreEqual(msg, "TEST: " + text);
         }
 
@@ -44,9 +53,12 @@ namespace UnitTestLogging
         {
             foreach (MessageLevel messageLevel in Enum.GetValues(typeof(MessageLevel)))
             {
-                string timeStampFormat = "hh:mm:ss";
-                string timeStamp = "[" + System.DateTime.Now.ToString(timeStampFormat) + "] ";
-                string msg = MessageBuilder.MessageStringBuilder(text, messageLevel, false, true, timeStampFormat);
+                logger.MessageProperties.ShowPrefix = false;
+                logger.MessageProperties.ShowTimeStamp = true;
+                logger.MessageProperties.TimeStampFormat = "hh:mm:ss";
+
+                string timeStamp = "[" + System.DateTime.Now.ToString(logger.MessageProperties.TimeStampFormat) + "] ";
+                string msg = MessageBuilder.MessageStringBuilder(text, messageLevel, logger.MessageProperties, logger.MessageLevelProperties);
                 Assert.AreEqual(msg, timeStamp + text);
             }
         }

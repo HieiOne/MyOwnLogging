@@ -14,23 +14,22 @@ namespace Logging.Messages
         /// </summary>
         /// <param name="msg">Message to build with</param>
         /// <param name="messageLevel">Message level, used to get the prefix and colors</param>
-        /// <param name="showPrefix">Indicates if the prefix has to be displayed</param>
-        /// <param name="showTimeStamp">Indicates if the timeStamp has to be displayed</param>
-        /// <param name="timeStampFormat">The timeStamp format that will be used</param>
+        /// <param name="messageProperties">Properties of the message</param>
+        /// <param name="messageLevelProperties">Properties of each message level</param>
         /// <returns>Returns a string following the properties values</returns>
-        public static string MessageStringBuilder(string msg, MessageLevel messageLevel, bool showPrefix, bool showTimeStamp, string timeStampFormat = null)
+        public static string MessageStringBuilder(string msg, MessageLevel messageLevel, MessageProperties messageProperties, MessageLevelProperties messageLevelProperties /*bool showPrefix, bool showTimeStamp, string timeStampFormat = null*/)
         {
             StringBuilder stringBuilder = new StringBuilder();
 
             // TimeStamp configuration
             string timeStamp = null;
-            if (showTimeStamp)
+            if (messageProperties.ShowTimeStamp)
             {
                 timeStamp = "[";
                 
-                if (timeStampFormat != null)
+                if (messageProperties.TimeStampFormat != null)
                 {
-                    timeStamp += System.DateTime.Now.ToString(timeStampFormat);
+                    timeStamp += System.DateTime.Now.ToString(messageProperties.TimeStampFormat);
                 }
                 else
                 {
@@ -42,9 +41,9 @@ namespace Logging.Messages
 
             // Prefix configuration
             string prefixMsg = null;
-            if (showPrefix)
+            if (messageProperties.ShowPrefix)
             {
-                prefixMsg = MessageLevelProperties.GetPrefix(messageLevel) + ": ";
+                prefixMsg = messageLevelProperties.GetPrefix(messageLevel) + ": ";
             }
 
             stringBuilder.AppendFormat("{0}{1}{2}", timeStamp, prefixMsg, msg);

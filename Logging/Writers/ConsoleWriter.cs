@@ -15,11 +15,13 @@ namespace Logging.Writers
         /// </summary>
         /// <param name="msg">Message to display</param>
         /// <param name="messageLevel">Indicates the level of the message</param>
-        public virtual void WriteMessage(string msg, MessageLevel messageLevel)
+        /// <param name="messageProperties">Properties of the message</param>
+        /// <param name="messageLevelProperties">Properties of each message level</param>
+        public virtual void WriteMessage(string msg, MessageLevel messageLevel, MessageProperties messageProperties, MessageLevelProperties messageLevelProperties)
         {
-            if (MessageLevelProperties.GetDisplayColor(messageLevel))
+            if (messageLevelProperties.GetDisplayColor(messageLevel))
             {
-                Console.ForegroundColor = MessageLevelProperties.GetConsoleColor(messageLevel);
+                Console.ForegroundColor = messageLevelProperties.GetConsoleColor(messageLevel);
                 Console.WriteLine(msg);
                 Console.ResetColor();
             }
