@@ -4,9 +4,9 @@ namespace LoggingConsoleTesting
 {
     using Logging;
 
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             Logger logger = new Logger(LoggingMode.Console);
             logger.WriteMessage("Hola Test Logging");
@@ -25,7 +25,7 @@ namespace LoggingConsoleTesting
             Console.WriteLine("Warning Messages: " + logger.MessageLevelProperties.GetCounter(MessageLevel.Warning));
             Console.WriteLine("Error Messages: " + logger.MessageLevelProperties.GetCounter(MessageLevel.Error));
             Console.WriteLine("Debug Messages: " + logger.MessageLevelProperties.GetCounter(MessageLevel.Debug));
-            
+
             Logger debugLogger = new Logger(LoggingMode.Debug);
             debugLogger.WriteMessage("TEST", MessageLevel.Debug);
 

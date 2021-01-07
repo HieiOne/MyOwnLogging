@@ -9,7 +9,7 @@ namespace Logging
     /// Indicates how the logging into a file will be written
     /// </summary>
     public enum WritingMode
-    { 
+    {
         /// <summary>
         /// Indicates that all logs will be appended into the file
         /// </summary>
@@ -151,7 +151,7 @@ namespace Logging
             MessageLevelProperties.IncreaseCounter(messageLevel);
             this.messageWriter.WriteMessage(msg, messageLevel, this.MessageProperties, this.MessageLevelProperties);
         }
-        
+
         /// <summary>
         /// This class initializes the Message Write depending on the provided logging mode
         /// </summary>
@@ -162,15 +162,18 @@ namespace Logging
                 case LoggingMode.Console:
                     this.messageWriter = new ConsoleWriter();
                     break;
+
                 case LoggingMode.Debug:
                     this.messageWriter = new DebuggerWriter();
                     break;
+
                 case LoggingMode.TextFile:
                     this.messageWriter = new TextFileWriter(this.FilePath, this.FileName, this.WritingMode);
                     break;
+
                 default:
                     break;
             }
         }
-    }   
+    }
 }

@@ -26,7 +26,7 @@ namespace Logging.Messages
             if (messageProperties.ShowTimeStamp)
             {
                 timeStamp = "[";
-                
+
                 if (messageProperties.TimeStampFormat != null)
                 {
                     timeStamp += System.DateTime.Now.ToString(messageProperties.TimeStampFormat);

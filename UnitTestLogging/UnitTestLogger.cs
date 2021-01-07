@@ -1,17 +1,17 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Logging;
+﻿using Logging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestLogging
 {
     [TestClass]
     public class UnitTestLoggerCounter
     {
-        readonly Logger logger = new Logger(LoggingMode.Console);
-        readonly string sampleText = "Text";
+        private readonly Logger logger = new Logger(LoggingMode.Console);
+        private readonly string sampleText = "Text";
 
         [TestMethod]
         public void TestInfoCounter()
-        {           
+        {
             logger.WriteMessage(sampleText, messageLevel: MessageLevel.Info);
             Assert.AreEqual(logger.MessageLevelProperties.GetCounter(MessageLevel.Info), 1);
         }

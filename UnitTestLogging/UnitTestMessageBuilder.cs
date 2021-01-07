@@ -1,15 +1,15 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using Logging;
 using Logging.Messages;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace UnitTestLogging
 {
     [TestClass]
     public class UnitTestMessageBuilder
     {
-        readonly Logger logger = new Logger(LoggingMode.Console);
-        readonly string text = "Hello World";
+        private readonly Logger logger = new Logger(LoggingMode.Console);
+        private readonly string text = "Hello World";
 
         [TestMethod]
         public void TestBasicBuild()
@@ -44,7 +44,7 @@ namespace UnitTestLogging
             logger.MessageProperties.ShowTimeStamp = false;
 
             logger.MessageLevelProperties.SetPrefix(MessageLevel.Info, "TEST");
-            string msg = MessageBuilder.MessageStringBuilder(text, MessageLevel.Info, logger.MessageProperties, logger.MessageLevelProperties);            
+            string msg = MessageBuilder.MessageStringBuilder(text, MessageLevel.Info, logger.MessageProperties, logger.MessageLevelProperties);
             Assert.AreEqual(msg, "TEST: " + text);
         }
 

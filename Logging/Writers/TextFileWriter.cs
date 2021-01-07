@@ -2,9 +2,8 @@
 
 namespace Logging.Writers
 {
-    using System;
-    using System.IO;
     using Logging.Messages;
+    using System.IO;
 
     /// <summary>
     /// This class is used to write into a TXT File

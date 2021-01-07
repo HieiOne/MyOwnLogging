@@ -2,8 +2,8 @@
 
 namespace Logging.Writers
 {
-    using System.Diagnostics;
     using Logging.Messages;
+    using System.Diagnostics;
 
     /// <summary>
     /// This class is used to write into the attached debugger
@@ -19,7 +19,7 @@ namespace Logging.Writers
         /// <param name="messageLevelProperties">Properties of each message level</param>
         public virtual void WriteMessage(string msg, MessageLevel messageLevel, MessageProperties messageProperties, MessageLevelProperties messageLevelProperties)
         {
-            Debug.WriteLine(msg);            
+            Debug.WriteLine(msg);
         }
     }
 }

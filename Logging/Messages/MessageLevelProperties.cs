@@ -93,7 +93,7 @@ namespace Logging.Messages
         /// </summary>
         private MessageLevelProperty Success { get; } = new MessageLevelProperty("OK", Color.Green, ConsoleColor.Green);
 
-        /// <summary>        
+        /// <summary>
         /// Gets the warning properties and can be modified through it
         /// Initialization of Warning Message Level
         /// </summary>
@@ -122,14 +122,19 @@ namespace Logging.Messages
             {
                 case MessageLevel.Info:
                     return this.Info.PrefixMessage;
+
                 case MessageLevel.Success:
                     return this.Success.PrefixMessage;
+
                 case MessageLevel.Warning:
                     return this.Warning.PrefixMessage;
+
                 case MessageLevel.Error:
                     return this.Error.PrefixMessage;
+
                 case MessageLevel.Debug:
                     return this.Debug.PrefixMessage;
+
                 default:
                     return default;
             }
@@ -147,18 +152,23 @@ namespace Logging.Messages
                 case MessageLevel.Info:
                     this.Info.PrefixMessage = prefixMsg;
                     break;
+
                 case MessageLevel.Success:
                     this.Success.PrefixMessage = prefixMsg;
                     break;
+
                 case MessageLevel.Warning:
                     this.Warning.PrefixMessage = prefixMsg;
                     break;
+
                 case MessageLevel.Error:
                     this.Error.PrefixMessage = prefixMsg;
                     break;
+
                 case MessageLevel.Debug:
                     this.Debug.PrefixMessage = prefixMsg;
                     break;
+
                 default:
                     break;
             }
@@ -175,14 +185,19 @@ namespace Logging.Messages
             {
                 case MessageLevel.Info:
                     return this.Info.ConsoleColor;
+
                 case MessageLevel.Success:
                     return this.Success.ConsoleColor;
+
                 case MessageLevel.Warning:
                     return this.Warning.ConsoleColor;
+
                 case MessageLevel.Error:
                     return this.Error.ConsoleColor;
+
                 case MessageLevel.Debug:
                     return this.Debug.ConsoleColor;
+
                 default:
                     return default;
             }
@@ -199,14 +214,19 @@ namespace Logging.Messages
             {
                 case MessageLevel.Info:
                     return this.Info.Counter;
+
                 case MessageLevel.Success:
                     return this.Success.Counter;
+
                 case MessageLevel.Warning:
                     return this.Warning.Counter;
+
                 case MessageLevel.Error:
                     return this.Error.Counter;
+
                 case MessageLevel.Debug:
                     return this.Debug.Counter;
+
                 default:
                     return default;
             }
@@ -223,14 +243,19 @@ namespace Logging.Messages
             {
                 case MessageLevel.Info:
                     return this.Info.DisplayColor;
+
                 case MessageLevel.Success:
                     return this.Success.DisplayColor;
+
                 case MessageLevel.Warning:
                     return this.Warning.DisplayColor;
+
                 case MessageLevel.Error:
                     return this.Error.DisplayColor;
+
                 case MessageLevel.Debug:
                     return this.Debug.DisplayColor;
+
                 default:
                     return default;
             }
@@ -248,18 +273,23 @@ namespace Logging.Messages
                 case MessageLevel.Info:
                     this.Info.SetConsoleColor(consoleColor);
                     break;
+
                 case MessageLevel.Success:
                     this.Success.SetConsoleColor(consoleColor);
                     break;
+
                 case MessageLevel.Warning:
                     this.Warning.SetConsoleColor(consoleColor);
                     break;
+
                 case MessageLevel.Error:
                     this.Error.SetConsoleColor(consoleColor);
                     break;
+
                 case MessageLevel.Debug:
                     this.Debug.SetConsoleColor(consoleColor);
                     break;
+
                 default:
                     break;
             }
@@ -276,18 +306,23 @@ namespace Logging.Messages
                 case MessageLevel.Info:
                     this.Info.IncreaseCounter();
                     break;
+
                 case MessageLevel.Success:
                     this.Success.IncreaseCounter();
                     break;
+
                 case MessageLevel.Warning:
                     this.Warning.IncreaseCounter();
                     break;
+
                 case MessageLevel.Error:
                     this.Error.IncreaseCounter();
                     break;
+
                 case MessageLevel.Debug:
                     this.Debug.IncreaseCounter();
                     break;
+
                 default:
                     break;
             }

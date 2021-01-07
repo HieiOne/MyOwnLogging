@@ -2,8 +2,8 @@
 
 namespace Logging.Writers
 {
-    using System;
     using Logging.Messages;
+    using System;
 
     /// <summary>
     /// This class is used to write into the console
@@ -29,6 +29,6 @@ namespace Logging.Writers
             {
                 Console.WriteLine(msg);
             }
-        }        
+        }
     }
 }
