@@ -2,6 +2,8 @@
 
 namespace Logging.Writers
 {
+    using Logging.Messages;
+
     /// <summary>
     /// Interface to set all Writers requirements
     /// </summary>
@@ -12,6 +14,8 @@ namespace Logging.Writers
         /// </summary>
         /// <param name="msg">Message to be displayed</param>
         /// <param name="messageLevel">Indicates the level of the message</param>
-        void WriteMessage(string msg, MessageLevel messageLevel);
+        /// <param name="messageProperties">Properties of the message</param>
+        /// <param name="messageLevelProperties">Properties of each message level</param>
+        void WriteMessage(string msg, MessageLevel messageLevel, MessageProperties messageProperties, MessageLevelProperties messageLevelProperties);
     }
 }

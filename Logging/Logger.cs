@@ -116,6 +116,11 @@ namespace Logging
         public MessageProperties MessageProperties { get; set; } = new MessageProperties();
 
         /// <summary>
+        /// Gets or sets the properties that each message level has
+        /// </summary>
+        public MessageLevelProperties MessageLevelProperties { get; set; } = new MessageLevelProperties();
+
+        /// <summary>
         /// Gets the file path where the logging files will be stored, has to be set with the override constructor
         /// </summary>
         public string FilePath { get; private set; }
@@ -142,9 +147,9 @@ namespace Logging
         /// <param name="messageLevel">Indicates the level of the message</param>
         public void WriteMessage(string msg, MessageLevel messageLevel = MessageLevel.Info)
         {
-            msg = MessageBuilder.MessageStringBuilder(msg, messageLevel, this.MessageProperties.ShowPrefix, this.MessageProperties.ShowTimeStamp, this.MessageProperties.TimeStampFormat);
+            msg = MessageBuilder.MessageStringBuilder(msg, messageLevel, this.MessageProperties, this.MessageLevelProperties);
             MessageLevelProperties.IncreaseCounter(messageLevel);
-            this.messageWriter.WriteMessage(msg, messageLevel);
+            this.messageWriter.WriteMessage(msg, messageLevel, this.MessageProperties, this.MessageLevelProperties);
         }
         
         /// <summary>

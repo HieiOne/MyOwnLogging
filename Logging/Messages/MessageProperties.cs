@@ -2,8 +2,6 @@
 
 namespace Logging.Messages
 {
-    using System;
-
     /// <summary>
     /// Defines the properties of the message, indicating if it will have prefixes, timestamps or different colors
     /// </summary>
@@ -41,46 +39,6 @@ namespace Logging.Messages
             {
                 return filePath + fileName;
             }
-        }
-
-        /// <summary>
-        /// Gets the counter depending on <paramref name="messageLevel"/>
-        /// </summary>
-        /// <param name="messageLevel">Message level to get the value from</param>
-        /// <returns>Integer with the counter of messages written</returns>
-        public int GetCounter(MessageLevel messageLevel) 
-        { 
-            return MessageLevelProperties.GetCounter(messageLevel); 
-        }
-
-        /// <summary>
-        /// Gets the prefix depending on <paramref name="messageLevel"/>
-        /// </summary>
-        /// <param name="messageLevel">Message level to get the value from</param>
-        /// <returns>String with the prefix of the message level</returns>
-        public string GetPrefix(MessageLevel messageLevel) 
-        { 
-            return MessageLevelProperties.GetPrefix(messageLevel); 
-        }
-
-        /// <summary>
-        /// Sets the prefix of the <paramref name="messageLevel"/>
-        /// </summary>
-        /// <param name="messageLevel">Message level to set the value to</param>
-        /// <param name="prefixMsg">Prefix to set the prefix to</param>
-        public void SetPrefix(MessageLevel messageLevel, string prefixMsg) 
-        { 
-            MessageLevelProperties.SetPrefix(messageLevel, prefixMsg); 
-        }
-
-        /// <summary>
-        /// Sets the Console Color of the <paramref name="messageLevel"/>
-        /// </summary>
-        /// <param name="messageLevel">Message level to set the value to</param>
-        /// <param name="consoleColor">Color to set the value to</param>
-        public void SetConsoleColor(MessageLevel messageLevel, ConsoleColor consoleColor) 
-        { 
-            MessageLevelProperties.SetConsoleColor(messageLevel, consoleColor); 
         }
     }
 }
