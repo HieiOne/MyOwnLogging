@@ -8,7 +8,7 @@ namespace Logging.Messages
     /// <summary>
     /// Defines a message level properties and its construction, including the prefixes, colors and other information regarding a specific level.
     /// </summary>
-    public class MessageLevelProperty
+    internal class MessageLevelProperty
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageLevelProperty"/> class, the constructor to create a Message Level Property used to create the message levels on the Enum MessagingLevel manually
@@ -67,6 +67,9 @@ namespace Logging.Messages
             this.DisplayColor = true;
         }
 
+        /// <summary>
+        /// Increases the counter count
+        /// </summary>
         internal void IncreaseCounter()
         {
             this.Counter++;
@@ -82,31 +85,31 @@ namespace Logging.Messages
         /// Gets the info properties and can be modified through it
         /// Initialization of Info Message Level
         /// </summary>
-        public MessageLevelProperty Info { get; } = new MessageLevelProperty("INFO");
+        private MessageLevelProperty Info { get; } = new MessageLevelProperty("INFO");
 
         /// <summary>
         /// Gets the success properties and can be modified through it
         /// Initialization of Success Message Level
         /// </summary>
-        public MessageLevelProperty Success { get; } = new MessageLevelProperty("OK", Color.Green, ConsoleColor.Green);
+        private MessageLevelProperty Success { get; } = new MessageLevelProperty("OK", Color.Green, ConsoleColor.Green);
 
         /// <summary>        
         /// Gets the warning properties and can be modified through it
         /// Initialization of Warning Message Level
         /// </summary>
-        public MessageLevelProperty Warning { get; } = new MessageLevelProperty("WARNING", Color.Yellow, ConsoleColor.Yellow);
+        private MessageLevelProperty Warning { get; } = new MessageLevelProperty("WARNING", Color.Yellow, ConsoleColor.Yellow);
 
         /// <summary>
         /// Gets the error properties and can be modified through it
         /// Initialization of Error Message Level
         /// </summary>
-        public MessageLevelProperty Error { get; } = new MessageLevelProperty("ERROR", Color.Red, ConsoleColor.Red);
+        private MessageLevelProperty Error { get; } = new MessageLevelProperty("ERROR", Color.Red, ConsoleColor.Red);
 
         /// <summary>
         /// Gets the debug properties and can be modified through it
         /// Initialization of Debug Message Level
         /// </summary>
-        public MessageLevelProperty Debug { get; } = new MessageLevelProperty("DEBUG", Color.Blue, ConsoleColor.Blue);
+        private MessageLevelProperty Debug { get; } = new MessageLevelProperty("DEBUG", Color.Blue, ConsoleColor.Blue);
 
         /// <summary>
         /// Gets the prefix depending on <paramref name="messageLevel"/>
