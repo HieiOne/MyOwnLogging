@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Licensed under the GNU General Public License v3.0. See LICENSE in the project root for license information.
 
-namespace Logging
+namespace Logging.Loggers
 {
     using Messages;
     using Writers;
 
+    /// <summary>
+    /// Base class for the Loggers
+    /// </summary>
     public class LoggerBase
     {
         /// <summary>
         /// Class that handles the writing depending on the Logging Mode provided
         /// </summary>
-        internal IWriter messageWriter;
+        internal IWriter MessageWriter;
 
         /// <summary>
         /// Gets or sets the properties that the messages have
@@ -33,7 +34,7 @@ namespace Logging
         {
             msg = MessageBuilder.MessageStringBuilder(msg, messageLevel, this.MessageProperties, this.MessageLevelProperties);
             MessageLevelProperties.IncreaseCounter(messageLevel);
-            this.messageWriter.WriteMessage(msg, messageLevel, this.MessageProperties, this.MessageLevelProperties);
+            this.MessageWriter.WriteMessage(msg, messageLevel, this.MessageProperties, this.MessageLevelProperties);
         }
     }
 }

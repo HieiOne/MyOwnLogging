@@ -2,9 +2,6 @@
 
 namespace Logging
 {
-    using Messages;
-    using Writers;
-
     /// <summary>
     /// Indicates how the logging into a file will be written
     /// </summary>
@@ -72,29 +69,5 @@ namespace Logging
         /// Represents a debug message
         /// </summary>
         Debug
-    }
-
-    public class ConsoleLogger : LoggerBase
-    {
-        public ConsoleLogger()
-        {
-            this.messageWriter = new ConsoleWriter();
-        }
-    }
-
-    public class DebugLogger : LoggerBase
-    {
-        public DebugLogger()
-        {
-            this.messageWriter = new DebuggerWriter();
-        }
-    }
-
-    public class FileLogger : LoggerBase
-    {
-        public FileLogger(string filePath, string fileName, WritingMode writingMode = WritingMode.Appending)
-        {
-            this.messageWriter = new TextFileWriter(filePath, fileName, writingMode);
-        }
     }
 }

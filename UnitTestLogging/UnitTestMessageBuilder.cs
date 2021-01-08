@@ -1,4 +1,5 @@
 using Logging;
+using Logging.Loggers;
 using Logging.Messages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

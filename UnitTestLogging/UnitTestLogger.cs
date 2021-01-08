@@ -1,4 +1,5 @@
 ﻿using Logging;
+using Logging.Loggers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestLogging
