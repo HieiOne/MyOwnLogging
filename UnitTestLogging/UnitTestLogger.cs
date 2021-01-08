@@ -1,4 +1,5 @@
 ﻿using Logging;
+using Logging.Loggers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestLogging
@@ -6,7 +7,7 @@ namespace UnitTestLogging
     [TestClass]
     public class UnitTestLoggerCounter
     {
-        private readonly Logger logger = new Logger(LoggingMode.Console);
+        private readonly ConsoleLogger logger = new ConsoleLogger();
         private readonly string sampleText = "Text";
 
         [TestMethod]

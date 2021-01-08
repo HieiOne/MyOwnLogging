@@ -1,4 +1,5 @@
 using Logging;
+using Logging.Loggers;
 using Logging.Messages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -8,7 +9,7 @@ namespace UnitTestLogging
     [TestClass]
     public class UnitTestMessageBuilder
     {
-        private readonly Logger logger = new Logger(LoggingMode.Console);
+        private readonly ConsoleLogger logger = new ConsoleLogger();
         private readonly string text = "Hello World";
 
         [TestMethod]

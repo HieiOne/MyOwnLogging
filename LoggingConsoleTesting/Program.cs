@@ -3,12 +3,13 @@
 namespace LoggingConsoleTesting
 {
     using Logging;
+    using Logging.Loggers;
 
     internal class Program
     {
         private static void Main()
         {
-            Logger logger = new Logger(LoggingMode.Console);
+            ConsoleLogger logger = new ConsoleLogger();
             logger.WriteMessage("Hola Test Logging");
             logger.MessageLevelProperties.SetPrefix(MessageLevel.Info, "INFORMACION");
             logger.MessageLevelProperties.SetConsoleColor(MessageLevel.Info, ConsoleColor.DarkCyan);
@@ -26,17 +27,17 @@ namespace LoggingConsoleTesting
             Console.WriteLine("Error Messages: " + logger.MessageLevelProperties.GetCounter(MessageLevel.Error));
             Console.WriteLine("Debug Messages: " + logger.MessageLevelProperties.GetCounter(MessageLevel.Debug));
 
-            Logger debugLogger = new Logger(LoggingMode.Debug);
+            DebugLogger debugLogger = new DebugLogger();
             debugLogger.WriteMessage("TEST", MessageLevel.Debug);
 
-            Logger textLogger = new Logger(@"C:\temp", "PruebaLog", LoggingMode.TextFile, WritingMode.Appending);
+            FileLogger textLogger = new FileLogger(@"C:\temp", "PruebaLog", WritingMode.Appending);
             textLogger.MessageProperties.TimeStampFormat = "hh:mm:ss";
             textLogger.WriteMessage("Test");
             textLogger.WriteMessage("Test2");
             textLogger.WriteMessage("Test");
             textLogger.WriteMessage("Test2");
 
-            Logger textLogger2 = new Logger(@"C:\temp", "PruebaLog2", LoggingMode.TextFile, WritingMode.Recreating);
+            FileLogger textLogger2 = new FileLogger(@"C:\temp", "PruebaLog2", WritingMode.Recreating);
             textLogger2.WriteMessage("Test3");
             textLogger2.WriteMessage("Test5");
             textLogger2.WriteMessage("Test4");
