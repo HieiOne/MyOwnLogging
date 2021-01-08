@@ -8,7 +8,7 @@ namespace UnitTestLogging
     [TestClass]
     public class UnitTestMessageBuilder
     {
-        private readonly Logger logger = new Logger(LoggingMode.Console);
+        private readonly ConsoleLogger logger = new ConsoleLogger();
         private readonly string text = "Hello World";
 
         [TestMethod]
