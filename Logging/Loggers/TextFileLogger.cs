@@ -8,7 +8,7 @@ namespace Logging.Loggers
     /// <summary>
     /// This class is used to write into a TXT File
     /// </summary>
-    public class FileLogger : LoggerBase
+    public class TextFileLogger : LoggerBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FileLogger"/> class
@@ -16,7 +16,7 @@ namespace Logging.Loggers
         /// <param name="filePath">Path where the file will be stored</param>
         /// <param name="fileName">Name of the file</param>
         /// <param name="writingMode">Used writing mode</param>
-        public FileLogger(string filePath, string fileName, WritingMode writingMode = WritingMode.Appending)
+        public TextFileLogger(string filePath, string fileName, WritingMode writingMode = WritingMode.Appending)
         {
             this.FilePath = filePath;
             this.FileName = fileName;

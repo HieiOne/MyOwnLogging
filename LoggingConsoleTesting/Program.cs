@@ -30,14 +30,14 @@ namespace LoggingConsoleTesting
             DebuggerLogger debugLogger = new DebuggerLogger();
             debugLogger.WriteMessage("TEST", MessageLevel.Debug);
 
-            FileLogger textLogger = new FileLogger(@"C:\temp", "PruebaLog", WritingMode.Appending);
+            TextFileLogger textLogger = new TextFileLogger(@"C:\temp", "PruebaLog", WritingMode.Appending);
             textLogger.MessageProperties.TimeStampFormat = "hh:mm:ss";
             textLogger.WriteMessage("Test");
             textLogger.WriteMessage("Test2");
             textLogger.WriteMessage("Test");
             textLogger.WriteMessage("Test2");
 
-            FileLogger textLogger2 = new FileLogger(@"C:\temp", "PruebaLog2", WritingMode.Recreating);
+            TextFileLogger textLogger2 = new TextFileLogger(@"C:\temp", "PruebaLog2", WritingMode.Recreating);
             textLogger2.WriteMessage("Test3");
             textLogger2.WriteMessage("Test5");
             textLogger2.WriteMessage("Test4");
