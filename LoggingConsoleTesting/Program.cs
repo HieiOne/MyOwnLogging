@@ -27,7 +27,7 @@ namespace LoggingConsoleTesting
             Console.WriteLine("Error Messages: " + logger.MessageLevelProperties.GetCounter(MessageLevel.Error));
             Console.WriteLine("Debug Messages: " + logger.MessageLevelProperties.GetCounter(MessageLevel.Debug));
 
-            DebugLogger debugLogger = new DebugLogger();
+            DebuggerLogger debugLogger = new DebuggerLogger();
             debugLogger.WriteMessage("TEST", MessageLevel.Debug);
 
             FileLogger textLogger = new FileLogger(@"C:\temp", "PruebaLog", WritingMode.Appending);

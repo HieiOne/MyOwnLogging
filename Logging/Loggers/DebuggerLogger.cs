@@ -2,19 +2,21 @@
 
 namespace Logging.Loggers
 {
-    using Writers;
+    using System.Diagnostics;
 
     /// <summary>
-    /// Logging to the attached debugger
+    /// This class is used to write into the attached debugger
     /// </summary>
-    public class DebugLogger : LoggerBase
+    public class DebuggerLogger : LoggerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DebugLogger"/> class
+        /// Method to write into the debugger
         /// </summary>
-        public DebugLogger()
+        /// <param name="msg">Message to display</param>
+        /// <param name="messageLevel">Indicates the level of the message</param>
+        internal override void WriterLogger(string msg, MessageLevel messageLevel)
         {
-            this.MessageWriter = new DebuggerWriter();
+            Debug.WriteLine(msg);
         }
     }
 }

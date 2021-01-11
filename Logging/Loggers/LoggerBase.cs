@@ -2,19 +2,13 @@
 
 namespace Logging.Loggers
 {
-    using Messages;
-    using Writers;
+    using Logging.Messages;
 
     /// <summary>
-    /// Base class for the Loggers
+    /// Base for all Writers use the specific Loggers instead of the base to log.
     /// </summary>
-    public class LoggerBase
+    public abstract class LoggerBase
     {
-        /// <summary>
-        /// Class that handles the writing depending on the Logging Mode provided
-        /// </summary>
-        internal IWriter MessageWriter;
-
         /// <summary>
         /// Gets or sets the properties that the messages have
         /// </summary>
@@ -26,15 +20,22 @@ namespace Logging.Loggers
         public MessageLevelProperties MessageLevelProperties { get; set; } = new MessageLevelProperties();
 
         /// <summary>
-        /// Writes the message depending on the specified message level and the logging mode set in the logger class
+        /// Builds the message and increases counter of the message level
         /// </summary>
-        /// <param name="msg">Message to log</param>
-        /// <param name="messageLevel">Indicates the level of the message</param>
+        /// <param name="msg">Message to build</param>
+        /// <param name="messageLevel">Message level of the message</param>
         public void WriteMessage(string msg, MessageLevel messageLevel = MessageLevel.Info)
         {
             msg = MessageBuilder.MessageStringBuilder(msg, messageLevel, this.MessageProperties, this.MessageLevelProperties);
             MessageLevelProperties.IncreaseCounter(messageLevel);
-            this.MessageWriter.WriteMessage(msg, messageLevel, this.MessageProperties, this.MessageLevelProperties);
+            this.WriterLogger(msg, messageLevel);
         }
+
+        /// <summary>
+        /// Method to write messages in writers
+        /// </summary>
+        /// <param name="msg">Message to be displayed</param>
+        /// <param name="messageLevel">Indicates the level of the message</param>
+        internal abstract void WriterLogger(string msg, MessageLevel messageLevel);
     }
 }
