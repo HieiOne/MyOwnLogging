@@ -11,7 +11,7 @@ namespace Logging.Loggers
     public class FileLogger : LoggerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TextFileWriter"/> class
+        /// Initializes a new instance of the <see cref="FileLogger"/> class
         /// </summary>
         /// <param name="filePath">Path where the file will be stored</param>
         /// <param name="fileName">Name of the file</param>
