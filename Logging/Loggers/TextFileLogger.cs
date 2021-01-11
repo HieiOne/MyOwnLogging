@@ -2,7 +2,6 @@
 
 namespace Logging.Loggers
 {
-    using Logging.Messages;
     using System.IO;
 
     /// <summary>
@@ -11,7 +10,7 @@ namespace Logging.Loggers
     public class TextFileLogger : LoggerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileLogger"/> class
+        /// Initializes a new instance of the <see cref="TextFileLogger"/> class
         /// </summary>
         /// <param name="filePath">Path where the file will be stored</param>
         /// <param name="fileName">Name of the file</param>
@@ -23,7 +22,7 @@ namespace Logging.Loggers
             this.WritingMode = writingMode;
 
             // Build full file name
-            this.FullFileName = MessageProperties.GetFullNamePath(this.FilePath, this.FileName) + ".txt";
+            this.FullFileName = this.GetFullNamePath(this.FilePath, this.FileName) + ".txt";
 
             // Checks for file path and file name
             this.FileInitialization();

@@ -37,5 +37,24 @@ namespace Logging.Loggers
         /// <param name="msg">Message to be displayed</param>
         /// <param name="messageLevel">Indicates the level of the message</param>
         internal abstract void WriterLogger(string msg, MessageLevel messageLevel);
+
+        /// <summary>
+        /// Gets the full name of the file including the path, checking if the filePath ends or not with the directory separator char
+        /// </summary>
+        /// <param name="filePath">File path of the file</param>
+        /// <param name="fileName">Filename of the file</param>
+        /// <returns>Returns a full path with fileName included</returns>
+        internal string GetFullNamePath(string filePath, string fileName)
+        {
+            // Check if the file path includes the directory separator char
+            if (filePath[filePath.Length - 1] != System.IO.Path.DirectorySeparatorChar)
+            {
+                return filePath + System.IO.Path.DirectorySeparatorChar + fileName;
+            }
+            else
+            {
+                return filePath + fileName;
+            }
+        }
     }
 }

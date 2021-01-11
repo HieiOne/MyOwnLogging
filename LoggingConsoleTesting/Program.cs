@@ -40,7 +40,14 @@ namespace LoggingConsoleTesting
             TextFileLogger textLogger2 = new TextFileLogger(@"C:\temp", "PruebaLog2", WritingMode.Recreating);
             textLogger2.WriteMessage("Test3");
             textLogger2.WriteMessage("Test5");
-            textLogger2.WriteMessage("Test4");
+            textLogger2.WriteMessage("Test4");            
+
+            XMLFileLogger XmlFileLogger = new XMLFileLogger(@"C:\temp", "PruebaLog2");
+            XmlFileLogger.StartDocument();
+            XmlFileLogger.WriteMessage("Test3");
+            XmlFileLogger.WriteMessage("Test5");
+            XmlFileLogger.WriteMessage("Test4");
+            XmlFileLogger.EndDocument();
 
             Console.ReadKey();
         }
