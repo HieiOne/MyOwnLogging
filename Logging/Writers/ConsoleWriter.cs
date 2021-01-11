@@ -8,20 +8,18 @@ namespace Logging.Writers
     /// <summary>
     /// This class is used to write into the console
     /// </summary>
-    internal class ConsoleWriter : IWriter
+    public class ConsoleWriter : WriterBase
     {
         /// <summary>
         /// Method to write into the console
         /// </summary>
         /// <param name="msg">Message to display</param>
         /// <param name="messageLevel">Indicates the level of the message</param>
-        /// <param name="messageProperties">Properties of the message</param>
-        /// <param name="messageLevelProperties">Properties of each message level</param>
-        public virtual void WriteMessage(string msg, MessageLevel messageLevel, MessageProperties messageProperties, MessageLevelProperties messageLevelProperties)
+        internal override void WriterLogger(string msg, MessageLevel messageLevel)
         {
-            if (messageLevelProperties.GetDisplayColor(messageLevel))
+            if (this.MessageLevelProperties.GetDisplayColor(messageLevel))
             {
-                Console.ForegroundColor = messageLevelProperties.GetConsoleColor(messageLevel);
+                Console.ForegroundColor = this.MessageLevelProperties.GetConsoleColor(messageLevel);
                 Console.WriteLine(msg);
                 Console.ResetColor();
             }

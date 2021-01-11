@@ -8,16 +8,14 @@ namespace Logging.Writers
     /// <summary>
     /// This class is used to write into the attached debugger
     /// </summary>
-    internal class DebuggerWriter : IWriter
+    public class DebuggerWriter : WriterBase
     {
         /// <summary>
         /// Method to write into the debugger
         /// </summary>
         /// <param name="msg">Message to display</param>
         /// <param name="messageLevel">Indicates the level of the message</param>
-        /// <param name="messageProperties">Properties of the message</param>
-        /// <param name="messageLevelProperties">Properties of each message level</param>
-        public virtual void WriteMessage(string msg, MessageLevel messageLevel, MessageProperties messageProperties, MessageLevelProperties messageLevelProperties)
+        internal override void WriterLogger(string msg, MessageLevel messageLevel)
         {
             Debug.WriteLine(msg);
         }

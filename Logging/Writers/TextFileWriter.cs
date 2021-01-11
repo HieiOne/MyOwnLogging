@@ -8,7 +8,7 @@ namespace Logging.Writers
     /// <summary>
     /// This class is used to write into a TXT File
     /// </summary>
-    internal class TextFileWriter : IWriter
+    public class TextFileWriter : WriterBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TextFileWriter"/> class
@@ -16,7 +16,7 @@ namespace Logging.Writers
         /// <param name="filePath">Path where the file will be stored</param>
         /// <param name="fileName">Name of the file</param>
         /// <param name="writingMode">Used writing mode</param>
-        public TextFileWriter(string filePath, string fileName, WritingMode writingMode)
+        public TextFileWriter(string filePath, string fileName, WritingMode writingMode = WritingMode.Appending)
         {
             this.FilePath = filePath;
             this.FileName = fileName;
@@ -54,9 +54,7 @@ namespace Logging.Writers
         /// </summary>
         /// <param name="msg">Message that will be printed</param>
         /// <param name="messageLevel">Indicates the level of the message</param>
-        /// <param name="messageProperties">Properties of the message</param>
-        /// <param name="messageLevelProperties">Properties of each message level</param>
-        public virtual void WriteMessage(string msg, MessageLevel messageLevel, MessageProperties messageProperties, MessageLevelProperties messageLevelProperties)
+        internal override void WriterLogger(string msg, MessageLevel messageLevel)
         {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(this.FullFileName, true))
             {
