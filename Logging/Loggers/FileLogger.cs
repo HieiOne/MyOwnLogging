@@ -1,6 +1,6 @@
 ﻿// Licensed under the GNU General Public License v3.0. See LICENSE in the project root for license information.
 
-namespace Logging.Writers
+namespace Logging.Loggers
 {
     using Logging.Messages;
     using System.IO;
@@ -8,7 +8,7 @@ namespace Logging.Writers
     /// <summary>
     /// This class is used to write into a TXT File
     /// </summary>
-    public class TextFileWriter : WriterBase
+    public class FileLogger : LoggerBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TextFileWriter"/> class
@@ -16,7 +16,7 @@ namespace Logging.Writers
         /// <param name="filePath">Path where the file will be stored</param>
         /// <param name="fileName">Name of the file</param>
         /// <param name="writingMode">Used writing mode</param>
-        public TextFileWriter(string filePath, string fileName, WritingMode writingMode = WritingMode.Appending)
+        public FileLogger(string filePath, string fileName, WritingMode writingMode = WritingMode.Appending)
         {
             this.FilePath = filePath;
             this.FileName = fileName;

@@ -1,14 +1,13 @@
 ﻿// Licensed under the GNU General Public License v3.0. See LICENSE in the project root for license information.
 
-namespace Logging.Writers
+namespace Logging.Loggers
 {
-    using Logging.Messages;
     using System;
 
     /// <summary>
     /// This class is used to write into the console
     /// </summary>
-    public class ConsoleWriter : WriterBase
+    public class ConsoleLogger : LoggerBase
     {
         /// <summary>
         /// Method to write into the console

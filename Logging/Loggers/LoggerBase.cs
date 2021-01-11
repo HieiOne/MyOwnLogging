@@ -1,13 +1,13 @@
 ﻿// Licensed under the GNU General Public License v3.0. See LICENSE in the project root for license information.
 
-namespace Logging.Writers
+namespace Logging.Loggers
 {
     using Logging.Messages;
 
     /// <summary>
     /// Base for all Writers
     /// </summary>
-    public abstract class WriterBase
+    public abstract class LoggerBase
     {
         /// <summary>
         /// Gets or sets the properties that the messages have
@@ -34,7 +34,7 @@ namespace Logging.Writers
         /// <returns>Returns a string build with the configuration of MessageProperties and MessageLevelProperties</returns>
         public void WriteMessage(string msg, MessageLevel messageLevel = MessageLevel.Info)
         {
-            msg = MessageBuilder.MessageStringBuilder(msg, messageLevel, this.MessageProperties, this.MessageLevelProperties);            
+            msg = MessageBuilder.MessageStringBuilder(msg, messageLevel, this.MessageProperties, this.MessageLevelProperties);
             MessageLevelProperties.IncreaseCounter(messageLevel);
             this.WriterLogger(msg, messageLevel);
         }
